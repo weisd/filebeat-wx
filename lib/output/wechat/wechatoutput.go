@@ -35,7 +35,7 @@ func NewWeChatOutput(_ outputs.IndexManager, beat beat.Info, observer outputs.Ob
 		return outputs.Fail(err)
 	}
 
-	logger.Info("config", cfg)
+	logger.Info("config", config)
 
 	//encoder, err := codec.CreateEncoder(beat, cfg)
 	//if err != nil {
@@ -61,13 +61,14 @@ func NewWeChatOutput(_ outputs.IndexManager, beat beat.Info, observer outputs.Ob
 func (w *WeChatOutput) Publish(ctx context.Context, batch publisher.Batch) error {
 	events := batch.Events()
 	for _, event := range events {
-		data, err := w.encoder.Encode("wechat", &event.Content)
-		if err != nil {
-			fmt.Println("Encode error:", err)
-			continue
-		}
+		//data, err := w.encoder.Encode("wechat", &event.Content)
+		data, _ := json.Marshal(&event.Content)
+		//if err != nil {
+		//	fmt.Println("Encode error:", err)
+		//	continue
+		//}
 
-		err = w.sendToWeChat(data)
+		err := w.sendToWeChat(data)
 		if err != nil {
 			fmt.Println("WeChat send error:", err)
 		}

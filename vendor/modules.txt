@@ -20,6 +20,10 @@ github.com/cespare/xxhash/v2
 # github.com/containerd/containerd v1.5.18
 ## explicit; go 1.17
 github.com/containerd/containerd/errdefs
+# github.com/coreos/go-systemd/v22 v22.3.2
+## explicit; go 1.12
+github.com/coreos/go-systemd/v22/internal/dlopen
+github.com/coreos/go-systemd/v22/sdjournal
 # github.com/davecgh/go-spew v1.1.1
 ## explicit
 github.com/davecgh/go-spew/spew
@@ -60,17 +64,14 @@ github.com/docker/go-connections/tlsconfig
 # github.com/docker/go-units v0.5.0
 ## explicit
 github.com/docker/go-units
-# github.com/dop251/goja v0.0.0-20200831102558-9af81ddcf0e1
+# github.com/dop251/goja v0.0.0-20200831102558-9af81ddcf0e1 => github.com/andrewkroh/goja v0.0.0-20190128172624-dd2ac4456e20
 ## explicit
 github.com/dop251/goja
 github.com/dop251/goja/ast
 github.com/dop251/goja/file
-github.com/dop251/goja/ftoa
-github.com/dop251/goja/ftoa/internal/fast
 github.com/dop251/goja/parser
 github.com/dop251/goja/token
-github.com/dop251/goja/unistring
-# github.com/dop251/goja_nodejs v0.0.0-20171011081505-adff31b136e6
+# github.com/dop251/goja_nodejs v0.0.0-20171011081505-adff31b136e6 => github.com/dop251/goja_nodejs v0.0.0-20171011081505-adff31b136e6
 ## explicit
 github.com/dop251/goja_nodejs/require
 github.com/dop251/goja_nodejs/util
@@ -107,8 +108,15 @@ github.com/elastic/beats/v7/filebeat/harvester
 github.com/elastic/beats/v7/filebeat/include
 github.com/elastic/beats/v7/filebeat/input
 github.com/elastic/beats/v7/filebeat/input/container
+github.com/elastic/beats/v7/filebeat/input/default-inputs
 github.com/elastic/beats/v7/filebeat/input/docker
 github.com/elastic/beats/v7/filebeat/input/file
+github.com/elastic/beats/v7/filebeat/input/filestream
+github.com/elastic/beats/v7/filebeat/input/filestream/internal/input-logfile
+github.com/elastic/beats/v7/filebeat/input/journald
+github.com/elastic/beats/v7/filebeat/input/journald/pkg/journalfield
+github.com/elastic/beats/v7/filebeat/input/journald/pkg/journalread
+github.com/elastic/beats/v7/filebeat/input/kafka
 github.com/elastic/beats/v7/filebeat/input/log
 github.com/elastic/beats/v7/filebeat/input/mqtt
 github.com/elastic/beats/v7/filebeat/input/redis
@@ -116,8 +124,12 @@ github.com/elastic/beats/v7/filebeat/input/stdin
 github.com/elastic/beats/v7/filebeat/input/syslog
 github.com/elastic/beats/v7/filebeat/input/tcp
 github.com/elastic/beats/v7/filebeat/input/udp
+github.com/elastic/beats/v7/filebeat/input/unix
 github.com/elastic/beats/v7/filebeat/input/v2
 github.com/elastic/beats/v7/filebeat/input/v2/compat
+github.com/elastic/beats/v7/filebeat/input/v2/input-cursor
+github.com/elastic/beats/v7/filebeat/input/v2/input-stateless
+github.com/elastic/beats/v7/filebeat/input/winlog
 github.com/elastic/beats/v7/filebeat/inputsource
 github.com/elastic/beats/v7/filebeat/inputsource/common/dgram
 github.com/elastic/beats/v7/filebeat/inputsource/common/streaming
@@ -295,6 +307,7 @@ github.com/elastic/beats/v7/libbeat/publisher/queue/spool
 github.com/elastic/beats/v7/libbeat/reader
 github.com/elastic/beats/v7/libbeat/reader/debug
 github.com/elastic/beats/v7/libbeat/reader/multiline
+github.com/elastic/beats/v7/libbeat/reader/parser
 github.com/elastic/beats/v7/libbeat/reader/readfile
 github.com/elastic/beats/v7/libbeat/reader/readfile/encoding
 github.com/elastic/beats/v7/libbeat/reader/readjson
@@ -305,6 +318,8 @@ github.com/elastic/beats/v7/libbeat/statestore/backend/memlog
 github.com/elastic/beats/v7/libbeat/template
 github.com/elastic/beats/v7/libbeat/testing
 github.com/elastic/beats/v7/libbeat/version
+github.com/elastic/beats/v7/winlogbeat/checkpoint
+github.com/elastic/beats/v7/winlogbeat/eventlog
 github.com/elastic/beats/v7/winlogbeat/sys
 github.com/elastic/beats/v7/winlogbeat/sys/winevent
 github.com/elastic/beats/v7/winlogbeat/sys/wineventlog
@@ -322,8 +337,10 @@ github.com/elastic/elastic-agent-client/v7/pkg/utils
 github.com/elastic/elastic-agent-libs/api/npipe
 # github.com/elastic/go-concert v0.2.0
 ## explicit; go 1.12
+github.com/elastic/go-concert
 github.com/elastic/go-concert/atomic
 github.com/elastic/go-concert/ctxtool
+github.com/elastic/go-concert/timed
 github.com/elastic/go-concert/unison
 # github.com/elastic/go-lumber v0.1.0
 ## explicit
@@ -567,6 +584,9 @@ github.com/pierrec/lz4/v4/internal/xxh32
 # github.com/pkg/errors v0.9.1
 ## explicit
 github.com/pkg/errors
+# github.com/pmezard/go-difflib v1.0.0
+## explicit
+github.com/pmezard/go-difflib/difflib
 # github.com/prometheus/procfs v0.7.3
 ## explicit; go 1.13
 github.com/prometheus/procfs
@@ -601,6 +621,10 @@ github.com/spf13/cobra
 # github.com/spf13/pflag v1.0.5
 ## explicit; go 1.12
 github.com/spf13/pflag
+# github.com/stretchr/testify v1.8.4
+## explicit; go 1.20
+github.com/stretchr/testify/assert
+github.com/stretchr/testify/require
 # github.com/urso/diag v0.0.0-20200210123136-21b3cc8eb797
 ## explicit; go 1.13
 github.com/urso/diag
@@ -910,6 +934,9 @@ gopkg.in/jcmturner/rpc.v1/ndr
 # gopkg.in/yaml.v2 v2.4.0
 ## explicit; go 1.15
 gopkg.in/yaml.v2
+# gopkg.in/yaml.v3 v3.0.1
+## explicit
+gopkg.in/yaml.v3
 # howett.net/plist v1.0.0
 ## explicit; go 1.12
 howett.net/plist
@@ -1133,3 +1160,5 @@ sigs.k8s.io/structured-merge-diff/v4/value
 ## explicit; go 1.12
 sigs.k8s.io/yaml
 # github.com/Shopify/sarama => github.com/IBM/sarama v1.38.1
+# github.com/dop251/goja => github.com/andrewkroh/goja v0.0.0-20190128172624-dd2ac4456e20
+# github.com/dop251/goja_nodejs => github.com/dop251/goja_nodejs v0.0.0-20171011081505-adff31b136e6

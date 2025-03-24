@@ -1,4 +1,4 @@
-cmd/
+bin/
 logs/
 
 filebeat.yml
