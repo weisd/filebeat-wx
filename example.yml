@@ -16,6 +16,7 @@ output.wechat:
   corp_secret: ""
   agent_id: 1000000
   to_party: "111110000"
-
+  codec.format:
+    string: "%{[@timestamp]}  %{[log.file.path]}  %{[message]}"
 
 
