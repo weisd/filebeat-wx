@@ -1,0 +1,21 @@
+# ============================== Filebeat Inputs ===============================
+
+filebeat.inputs:
+  - type: log
+    enabled: true
+    paths:
+      - ./logs/test.log
+    fields:
+      log_source: "wechat"
+
+# ============================== Output Configuration ==============================
+
+# 使用自定义的 WeChat Output
+output.wechat:
+  corp_id: ""
+  corp_secret: ""
+  agent_id: 1000000
+  to_party: "111110000"
+
+
+

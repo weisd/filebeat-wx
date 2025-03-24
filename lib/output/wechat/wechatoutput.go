@@ -37,10 +37,10 @@ func NewWeChatOutput(_ outputs.IndexManager, beat beat.Info, observer outputs.Ob
 
 	logger.Info("config", config)
 
-	//encoder, err := codec.CreateEncoder(beat, cfg)
-	//if err != nil {
-	//	return outputs.Fail(err)
-	//}
+	encoder, err := codec.CreateEncoder(beat, config.Codec)
+	if err != nil {
+		return outputs.Fail(err)
+	}
 
 	client := workwx.New(config.CorpId)
 
@@ -49,9 +49,9 @@ func NewWeChatOutput(_ outputs.IndexManager, beat beat.Info, observer outputs.Ob
 	app.SpawnAccessTokenRefresher()
 
 	out := &WeChatOutput{
-		App:  app,
-		conf: config,
-		//encoder:    encoder,
+		App:     app,
+		conf:    config,
+		encoder: encoder,
 	}
 
 	return outputs.Success(1, 0, out)
@@ -61,16 +61,12 @@ func NewWeChatOutput(_ outputs.IndexManager, beat beat.Info, observer outputs.Ob
 func (w *WeChatOutput) Publish(ctx context.Context, batch publisher.Batch) error {
 	events := batch.Events()
 	for _, event := range events {
-		//data, err := w.encoder.Encode("wechat", &event.Content)
-		data, _ := json.Marshal(&event.Content)
-		//if err != nil {
-		//	fmt.Println("Encode error:", err)
-		//	continue
-		//}
-
-		err := w.sendToWeChat(data)
+		data, err := w.encoder.Encode("wechat", &event.Content)
+		err = w.sendToWeChat(data)
 		if err != nil {
 			fmt.Println("WeChat send error:", err)
+			logger.Error("WeChat send error: %s", err)
+			continue
 		}
 	}
 	batch.ACK()
@@ -79,13 +75,8 @@ func (w *WeChatOutput) Publish(ctx context.Context, batch publisher.Batch) error
 
 // sendToWeChat 发送消息到微信 Webhook
 func (w *WeChatOutput) sendToWeChat(message []byte) error {
-	payload := map[string]interface{}{
-		"msgtype": "text",
-		"text": map[string]string{
-			"content": string(message),
-		},
-	}
-	jsonData, _ := json.Marshal(payload)
+
+	jsonData, _ := json.Marshal(string(message))
 
 	// send to party(parties)
 	to := &workwx.Recipient{
@@ -102,10 +93,9 @@ func (w *WeChatOutput) sendToWeChat(message []byte) error {
 
 // String 实现接口方法
 func (w *WeChatOutput) String() string {
-	return "WeChat Output"
+	return "WeChat-Output"
 }
 
 func (w *WeChatOutput) Close() error {
-
 	return nil
 }
