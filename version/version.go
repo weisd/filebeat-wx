@@ -6,7 +6,13 @@ package version
 
 import (
 	"fmt"
+	"runtime"
 	"strings"
+
+	"github.com/elastic/beats/v7/libbeat/cmd/instance"
+	"github.com/elastic/beats/v7/libbeat/common/cli"
+	"github.com/elastic/beats/v7/libbeat/version"
+	"github.com/spf13/cobra"
 )
 
 var (
@@ -34,8 +40,8 @@ type PkgVersion struct {
 	BuildPackageModule string
 }
 
-func (r PkgVersion) String() string {
-	return r.BuildDateTime + "-" + r.BuildGitCommit
+func (m PkgVersion) String() string {
+	return m.BuildDateTime + "-" + m.BuildGitCommit
 }
 
 func (m PkgVersion) PrintVersion() {
@@ -56,30 +62,31 @@ func PrintVersion() {
 	BuildInfo.PrintVersion()
 }
 
-// -------------------------------- main 调用代码---------------------------------------
-//package main
-//
-//import (
-//"flag"
-//"fmt"
-//
-//"wps.ktkt.com/debug/debug/version"
-//)
-//
-//var printVersion = flag.Bool("v", false, "show build version for the program")
-//
-//func main() {
-//	flag.Parse()
-//
-//	if *printVersion {
-//		version.PrintVersion()
-//	}
-//
-//	fmt.Println("test ------")
-//}
-// ** -------------------------------- main 调用代码 END---------------------------------------
+// GenVersionCmd generates the command version for a Beat.
+func GenVersionCmd(settings instance.Settings) *cobra.Command {
+	return &cobra.Command{
+		Use:   "version",
+		Short: "Show current version info",
+		Run: cli.RunWith(
+			func(_ *cobra.Command, args []string) error {
+				beat, err := instance.NewBeat(settings.Name, settings.IndexPrefix, settings.Version, settings.ElasticLicensed)
+				if err != nil {
+					return fmt.Errorf("error initializing beat: %s", err)
+				}
 
-// -------------------------------- build bash 代码---------------------------------------
+				buildTime := "unknown"
+				if bt := version.BuildTime(); !bt.IsZero() {
+					buildTime = bt.String()
+				}
+				fmt.Printf("%s version %s (%s), libbeat %s [%s built %s]\n",
+					beat.Info.Beat, beat.Info.Version, runtime.GOARCH, version.GetDefaultVersion(),
+					version.Commit(), buildTime)
 
-//
-// ** -------------------------------- build bash 代码 END---------------------------------------
+				fmt.Println()
+
+				PrintVersion()
+
+				return nil
+			}),
+	}
+}

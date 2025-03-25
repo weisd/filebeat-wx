@@ -18,4 +18,14 @@ program=$(basename ${moduleName})
 #echo "\$(pwd)"
 #
 
-go build -o bin/$program -ldflags "$flags" -v -mod=vendor  main.go
+GOARCH=$(go env GOARCH)
+GOOS=$(go env GOOS)
+
+if [ "$1" == "linux" ]; then
+    GOARCH="amd64"
+    GOOS="linux"
+fi
+
+#echo ">> GOOS=$GOOS GOARCH=$GOARCH go build -o bin/$program -ldflags "$flags" -v -mod=vendor  main.go"
+
+GOOS=$GOOS GOARCH=$GOARCH go build -o bin/$program -ldflags "$flags" -v -mod=vendor  main.go
