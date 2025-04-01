@@ -1,4 +1,4 @@
-module wps.ktkt.com/kt/wechatoutput
+module github.com/weisd/filebeat-wx
 
 go 1.23.0
 

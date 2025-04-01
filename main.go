@@ -3,7 +3,7 @@ package main
 //import (
 //	"os"
 //
-//	_ "wps.ktkt.com/kt/wechatoutput/lib/output/wechat"
+//	_ "github.com/weisd/filebeat-wx/lib/output/wechat"
 //
 //	"github.com/elastic/beats/v7/filebeat/cmd"
 //)
@@ -18,8 +18,8 @@ import (
 	"os"
 	_ "time/tzdata" // for timezone handling
 
-	_ "wps.ktkt.com/kt/wechatoutput/lib/output/wechat"
-	"wps.ktkt.com/kt/wechatoutput/version"
+	_ "github.com/weisd/filebeat-wx/lib/output/wechat"
+	"github.com/weisd/filebeat-wx/version"
 
 	"github.com/elastic/beats/v7/filebeat/cmd"
 	inputs "github.com/elastic/beats/v7/filebeat/input/default-inputs"
