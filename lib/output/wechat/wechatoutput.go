@@ -35,7 +35,7 @@ func NewWeChatOutput(_ outputs.IndexManager, beat beat.Info, observer outputs.Ob
 		return outputs.Fail(err)
 	}
 
-	logger.Info("config", config)
+	// logger.Info("config", config)
 
 	encoder, err := codec.CreateEncoder(beat, config.Codec)
 	if err != nil {

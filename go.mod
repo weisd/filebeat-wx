@@ -6,6 +6,7 @@ toolchain go1.23.7
 
 require (
 	github.com/elastic/beats/v7 v7.17.28
+	github.com/spf13/cobra v1.7.0
 	github.com/xen0n/go-workwx/v2 v2.0.0-20250310054000-e5dd4068dffa
 )
 
@@ -91,7 +92,6 @@ require (
 	github.com/santhosh-tekuri/jsonschema v1.2.4 // indirect
 	github.com/shirou/gopsutil v3.20.12+incompatible // indirect
 	github.com/sirupsen/logrus v1.8.1 // indirect
-	github.com/spf13/cobra v1.7.0 // indirect
 	github.com/spf13/pflag v1.0.5 // indirect
 	github.com/stretchr/testify v1.8.4 // indirect
 	github.com/urso/diag v0.0.0-20200210123136-21b3cc8eb797 // indirect
